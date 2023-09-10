@@ -1,5 +1,5 @@
 import express from "express";
-import weatherApi from "weather_api";
+import * as weatherApi from "weather_api";
 
 const app = express();
 const defaultClient = weatherApi.ApiClient.instance;
@@ -15,17 +15,11 @@ var q = "q_example"; // {String} Pass US Zipcode, UK Postcode, Canada Postalcode
 
 var dt = new Date("2013-10-20"); // {Date} Date on or after 1st Jan, 2015 in yyyy-MM-dd format
 
-var callback = function (error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log("API called successfully. Returned data: " + data);
-  }
+var callback = (error: any, data: string, response: any) => {
+    if (error) {
+        console.error(error);
+    } else {
+        console.log("API called successfully. Returned data: " + data);
+    }
 };
 api.astronomy(q, dt, callback);
-
-app.get('/', (req, res) => {
-    res.send("Hello World")
-})
-
-app.listen(8080);
